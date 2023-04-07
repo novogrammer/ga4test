@@ -26,7 +26,35 @@
   </head>
   <body>
     <div id="root">
-      height:1000vh;の縦長サイト
+      <h1>ga4test</h1>
+      <p>height:1000vh;の縦長サイト</p>
+      <div class="myevent-sender">
+        <p><button class="myevent-sender__button">myevent 送信ボタン</button>送信回数: <span class="myevent-sender__counter">-</span></p>
+      </div>
+      
     </div>
+    <script>
+      const button=document.querySelector(".myevent-sender__button");
+      if(!button){
+        throw new Error("button is null");
+      }
+      const counter=document.querySelector(".myevent-sender__counter");
+      if(!counter){
+        throw new Error("counter is null");
+      }
+      let count=0;
+      function updateCounter(){
+        counter.textContent=`${count}`;
+      }
+      button.addEventListener("click",()=>{
+        const dice=Math.floor(Math.random()*6)+1;
+        gtag("event","myevent",{
+          dice,
+        });
+        count+=1;
+        updateCounter();
+      });
+      updateCounter();
+    </script>
   </body>
 </html>
